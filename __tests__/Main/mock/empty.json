@@ -1,0 +1,9 @@
+{
+    "name": "mock",
+    "description": "this is a mock config",
+    "props": [],
+    "generate": {
+        "rules": []
+    },
+    "modify": []
+}

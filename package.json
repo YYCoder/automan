@@ -1,0 +1,49 @@
+{
+  "name": "automan",
+  "version": "0.0.1",
+  "description": "",
+  "bin": {
+    "automan": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "jest --config ./jest.config.js",
+    "test-dev": "jest --config ./jest.config.js --watch",
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json -w",
+    "debug": "DEBUG=automan:* node ./bin/index.js -c ",
+    "clear": "./scripts/clear"
+  },
+  "keywords": [
+    "automation"
+  ],
+  "author": "Markey",
+  "license": "MIT",
+  "dependencies": {
+    "ast-types": "^0.13.3",
+    "chalk": "^4.1.0",
+    "commander": "^5.1.0",
+    "debug": "^4.1.1",
+    "ejs": "^3.1.3",
+    "glob": "^7.1.6",
+    "inquirer": "^7.2.0",
+    "inquirer-autocomplete-prompt": "^1.0.2",
+    "is-git-clean": "^1.1.0",
+    "mkdirp": "^1.0.4",
+    "recast": "^0.19.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/debug": "^4.1.5",
+    "@types/ejs": "^3.0.4",
+    "@types/glob": "^7.1.2",
+    "@types/inquirer": "^6.5.0",
+    "@types/jest": "^26.0.0",
+    "@types/mkdirp": "^1.0.1",
+    "@types/node": "^14.0.13",
+    "@types/rimraf": "^3.0.0",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.1"
+  }
+}

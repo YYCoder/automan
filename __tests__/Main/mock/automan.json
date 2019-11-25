@@ -1,0 +1,26 @@
+{
+    "name": "mock",
+    "description": "this is a mock config",
+    "props": [
+        {
+            "name": "name",
+            "type": "string",
+            "description": "组件名称（非中文）",
+            "validate": ["ascii"]
+        }
+    ],
+    "generate": {
+        "output": {
+            "type": "path",
+            "description": "output path",
+            "validate": ["path"]
+        },
+        "rules": [
+            {
+                "template": "template/style.less",
+                "rename": "__name__/style.less"
+            }
+        ]
+    },
+    "modify": []
+}

@@ -1,0 +1,36 @@
+{
+    "name": "add-call-chain",
+    "description": "添加链式调用",
+    "props": [
+        {
+            "name": "arg1",
+            "type": "string",
+            "description": "调用参数 1",
+            "validate": ["boolean"]
+        },
+        {
+            "name": "arg2",
+            "type": "string",
+            "description": "调用参数 2",
+            "validate": ["number"]
+        }
+    ],
+    "generate": {},
+    "modify": [
+        {
+            "file": "./code.ts",
+            "rules": [
+                {
+                    "transformer": "AddCallChain",
+                    "func": "add",
+                    "root": "route",
+                    "args": [
+                        123,
+                        "123",
+                        true
+                    ]
+                }
+            ]
+        }
+    ]
+}

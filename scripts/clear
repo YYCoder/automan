@@ -1,0 +1,3 @@
+#! /bin/bash
+# remove all generated files
+git clean -fX

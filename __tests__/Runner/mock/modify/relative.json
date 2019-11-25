@@ -1,0 +1,12 @@
+{
+    "name": "mock",
+    "description": "modify",
+    "props": [],
+    "generate": {},
+    "modify": [
+        {
+            "file": "./code",
+            "rules": []
+        }
+    ]
+}
