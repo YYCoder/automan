@@ -1,0 +1,19 @@
+{
+    "name": "mock",
+    "description": "extraDir basic",
+    "props": [],
+    "generate": {
+        "extraDir": "foo/bar",
+        "output": {
+            "type": "path",
+            "description": "output path",
+            "validate": ["path"]
+        },
+        "rules": [
+            {
+                "template": "template/style.less"
+            }
+        ]
+    },
+    "modify": []
+}

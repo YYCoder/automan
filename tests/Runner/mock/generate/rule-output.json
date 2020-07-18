@@ -1,0 +1,18 @@
+{
+    "name": "mock",
+    "description": "rule output",
+    "props": [],
+    "generate": {
+        "rules": [
+            {
+                "template": "template/style.less",
+                "output": {
+                    "type": "path",
+                    "description": "rule output path",
+                    "validate": ["path"]
+                }
+            }
+        ]
+    },
+    "modify": []
+}

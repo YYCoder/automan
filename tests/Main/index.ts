@@ -205,7 +205,7 @@ describe('Main', () => {
     describe('resolveConfig', () => {
         it('relative path', () => {
             const program = new Command();
-            const mockPath = './__tests__/Main/mock/automan.json';
+            const mockPath = './tests/Main/mock/automan.json';
             program.config = mockPath;
             const m = new Main(program) as any;
             expect(m.resolveConfig()).toStrictEqual([
@@ -216,7 +216,7 @@ describe('Main', () => {
         
         it('absolute path', () => {
             const program = new Command();
-            const mockPath = path.resolve(process.cwd(), './__tests__/Main/mock/automan.json');
+            const mockPath = path.resolve(process.cwd(), './tests/Main/mock/automan.json');
             program.config = mockPath;
             const m = new Main(program) as any;
             expect(m.resolveConfig()).toStrictEqual([

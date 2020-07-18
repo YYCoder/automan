@@ -8,6 +8,12 @@ module.exports = {
         }
     },
     collectCoverage: true,
+    testMatch: [
+        "**/tests/**/*.[jt]s?(x)"
+    ],
+    testPathIgnorePatterns: [
+        "/node_modules/", "/template/", "output/"
+    ],
     collectCoverageFrom: [
         "src/**/*.ts",
         "!src/**/*.d.ts",

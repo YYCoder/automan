@@ -31,7 +31,7 @@ export const validators = {
 };
 
 // TODO: support specifying custom validator
-export const validatorFactory = (types: ValidateTypes[]): inquirer.Validator => {
+export const validatorFactory = (types: ValidateTypes[] = []): inquirer.Validator => {
     return (input: string) => types.reduce((res: boolean | string, type: ValidateTypes) => {
         if (res !== true) return res;
         return validators[type](input);
