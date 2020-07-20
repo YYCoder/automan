@@ -4,7 +4,7 @@ import { ConfigError } from '../../src/Errors';
 import path from 'path';
 import { resolveCwd, resolveDirname } from '../../src/utils';
 import rimraf from 'rimraf';
-import { readdirSync } from 'fs';
+import { readdirSync, writeFile, readFileSync } from 'fs';
 
 const RunnerFactory = (props: string = '', confPath: string = './mock/initialization/automan.json') => {
     const config = require(confPath);
@@ -20,6 +20,17 @@ const beforeGenerate = async (type: string) => {
             resolveDirname(__dirname, `./mock/run/${type}/output/*`),
             resolve
         );
+    });
+};
+const beforeModify = async (type: string) => {
+    const originalCode = `const router: any = {};
+    router.route.add("123", "haha", "xixi");`;
+    return new Promise((resolve) => {
+        writeFile(
+            resolveDirname(__dirname, `./mock/run/${type}/template/code.ts`),
+            originalCode,
+            () => resolve()
+        )
     });
 };
 describe('Runner', () => {
@@ -215,7 +226,7 @@ describe('Runner', () => {
     
     describe('run', () => {
         it('basic generate', async () => {
-            beforeGenerate('basic-generate');
+            await beforeGenerate('basic-generate');
             
             const [r] = RunnerFactory(
                 'name=foo,type=class,commonOutput=./tests/Runner/mock/run/basic-generate/output',
@@ -231,12 +242,44 @@ describe('Runner', () => {
             expect(files).toContain('style.less');
         });
         
-        it('basic modify', () => {
+        it('basic modify', async () => {
+            await beforeModify('basic-modify');
             
+            const [r] = RunnerFactory(
+                '',
+                './mock/run/basic-modify/automan.json'
+            );
+
+            await r.run();
+            
+            const content = readFileSync(
+                resolveDirname(__dirname, './mock/run/basic-modify/template/code.ts'),
+                'utf8'
+            );
+            expect(content.includes('router.route.add(123)')).toBe(true);
         });
         
-        it('generate and modify', () => {
+        it('generate and modify', async () => {
+            await beforeGenerate('generate-modify');
+            await beforeModify('generate-modify');
             
+            const [r] = RunnerFactory(
+                'name=foo,type=class,commonOutput=./tests/Runner/mock/run/generate-modify/output',
+                './mock/run/generate-modify/automan.json'
+            );
+
+            await r.run();
+            
+            const content = readFileSync(
+                resolveDirname(__dirname, './mock/run/generate-modify/template/code.ts'),
+                'utf8'
+            );
+            const files = readdirSync(
+                resolveDirname(__dirname, `./mock/run/generate-modify/output/foo`)
+            );
+            expect(files).toContain('index.tsx');
+            expect(files).toContain('style.less');
+            expect(content.includes('router.route.add(foo)')).toBe(true);
         });
     });
 });

@@ -2,10 +2,6 @@
 
 
 
-### Testing
-
-
-
 ### Unit Testing
 
 `npm run test` or `yarn test` will run the unit tests, using Jest as a runner and test framework.

@@ -10,6 +10,8 @@ import { parse } from "recast";
 import { toSource } from "./utils/ast";
 import { jsonstringify, relativeRoot } from "./utils";
 import { resolve } from "path";
+import BaseTransformer from "./transforms/Base";
+import { ObjectType } from "../types/utils";
 
 const debug = log('automan:Task');
 
@@ -143,6 +145,25 @@ export class ModifyTask extends Task {
         this.rules = rules;
     }
 
+    private loadTransformer = async (t: string) => {
+        try {
+            return (await import(`./transforms/${t}`)).default;
+        } catch(e) {
+            throw new Error(`can't find transformer called ${t}.`);
+        }
+    }
+    
+    private preprocessRule = (t: typeof BaseTransformer, rule: ModifyRule, data: ObjectType) => {
+        try {
+            debug(boldOrange('start process rule'));
+            const processedRule = t.preprocessRule(rule, data);
+            debug(greenBright('processedRule:'), jsonstringify(processedRule));
+            return processedRule;
+        } catch(e) {
+            throw new Error(`preprocessRule error ${e.message}.`);
+        }
+    }
+
     dryrun() {
         const rules = [...new Set(this.rules.map(({ transformer }) => transformer))];
         info(`about to modify ${greenBright(this.filePath)} and apply these rules: ${greenBright(rules)}`);
@@ -179,16 +200,12 @@ export class ModifyTask extends Task {
             const transforms = await Promise.all(
                 this.rules.map(async (rule) => {
                     const { transformer } = rule;
-                    try {
-                        const t = (await import(`./transforms/${transformer}`)).default;
-                        debug(boldOrange('start process rule'));
-                        const processedRule = t.preprocessRule(rule, data);
-                        debug(greenBright('processedRule:'), jsonstringify(processedRule));
-                        debug(`applying rule transformer: ${transformer}`);
-                        return new t(processedRule);
-                    } catch(e) {
-                        throw new Error(`can't find transformer called ${transformer}.`);
-                    }
+                    const t = await this.loadTransformer(transformer);
+                    const processedRule = this.preprocessRule(t, rule, data);
+                    
+                    debug(`applying rule transformer: ${transformer}`);
+                    
+                    return new t(processedRule);
                 })
             );
             const resAst = transforms.reduce((ast, trans) => trans.transform(ast), ast);
