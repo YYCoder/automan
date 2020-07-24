@@ -15,10 +15,12 @@ const debug = log('automan:AddCallChainTransformer');
 
 export default class AddCallChainTransformer extends BaseTransformer {
     rule: AddCallChainRule;
+    name: string;
 
     constructor(rule: AddCallChainRule) {
         super();
         this.rule = rule;
+        this.name = 'AddCallChain';
     }
 
     static preprocessRule = (rule: ModifyRule, data: object): ModifyRule => {
@@ -99,6 +101,8 @@ export default class AddCallChainTransformer extends BaseTransformer {
             // and compare the object(the left side of MemberExpression) if it matches these
             // three types, CallExpression/MemberExpression/Identifier. (e.g. rule.func is add, 
             // fun().add()/router.add()/router.route.add())
+            // if object is without any call, namely, is not a MemberExpression (e.g. obj;), then
+            // it should fail to add call
             visitMemberExpression(p) {
                 const node = p.node;
                 const { root, func } = rule;
