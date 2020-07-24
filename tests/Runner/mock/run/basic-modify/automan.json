@@ -1,72 +1,18 @@
 {
-    "name": "add-call-chain",
-    "description": "添加链式调用",
-    "props": [
-        {
-            "name": "arg1",
-            "type": "string",
-            "description": "调用参数 1",
-            "validate": ["boolean"]
-        },
-        {
-            "name": "arg2",
-            "type": "string",
-            "description": "调用参数 2",
-            "validate": ["number"]
-        }
-    ],
+    "name": "mock",
+    "description": "basic modify",
+    "props": [],
     "generate": {},
     "modify": [
         {
-            "file": "./code.ts",
+            "file": "./template/code.ts",
             "rules": [
                 {
                     "transformer": "AddCallChain",
                     "func": "add",
                     "root": "route",
                     "args": [
-                        123,
-                        "123",
-                        true,
-                        null,
-                        "<%= `${arg1}${arg2}` %>",
-                        {
-                            "__type__": "var",
-                            "value": "<%= `${arg1}${arg2}` %>"
-                        },
-                        {
-                            "__type__": "undefined",
-                            "value": "undefined"
-                        },
-                        {
-                            "__type__": "string",
-                            "value": "<%= `${arg1}-${arg2}` %>"
-                        },
-                        {
-                            "__type__": "obj",
-                            "value": {
-                                "name": "hahaah",
-                                "test": "<%= `${arg1}${arg2}` %>",
-                                "other": {
-                                    "__type__": "string",
-                                    "value": "<%= arg1 %>"
-                                }
-                            }
-                        },
-                        {
-                            "__type__": "arr",
-                            "value": [
-                                123,
-                                {
-                                    "__type__": "number",
-                                    "value": "<%= arg2 %>"
-                                },
-                                {
-                                    "__type__": "boolean",
-                                    "value": "<%= arg1 %>"
-                                }
-                            ]
-                        }
+                        123
                     ]
                 }
             ]
