@@ -1,6 +1,6 @@
 # Automan
 
-
+[![Coverage Status](https://coveralls.io/repos/github/YYCoder/automan/badge.svg?branch=master)](https://coveralls.io/github/YYCoder/automan?branch=master)
 
 ### Unit Testing
 

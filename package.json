@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test": "jest --config ./jest.config.js",
-    "test-dev": "jest --config ./jest.config.js --watch",
+    "coverage": "jest --coverage && coveralls < coverage/lcov.info",
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -p tsconfig.json -w",
     "debug": "DEBUG=automan:* node ./bin/index.js -c ",
@@ -43,6 +43,7 @@
     "@types/mkdirp": "^1.0.1",
     "@types/node": "^14.0.13",
     "@types/rimraf": "^3.0.0",
+    "coveralls": "^3.1.0",
     "jest": "^26.1.0",
     "ts-jest": "^26.1.1"
   }
