@@ -1,0 +1,26 @@
+{
+    "name": "mock",
+    "description": "extraDir with placeholder",
+    "props": [
+        {
+            "name": "name",
+            "type": "string",
+            "description": "component name",
+            "validate": ["ascii"]
+        }
+    ],
+    "generate": {
+        "extraDir": "__name__/bar",
+        "output": {
+            "type": "path",
+            "description": "output path",
+            "validate": ["path"]
+        },
+        "rules": [
+            {
+                "template": "template/style.less"
+            }
+        ]
+    },
+    "modify": []
+}

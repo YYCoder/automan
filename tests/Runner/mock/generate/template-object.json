@@ -1,0 +1,40 @@
+{
+    "name": "mock",
+    "description": "template object",
+    "props": [
+        {
+            "name": "type",
+            "type": "list",
+            "description": "组件类型",
+            "prompt": [
+                {
+                    "value": "class",
+                    "name": "Class"
+                },
+                {
+                    "value": "function",
+                    "name": "Function"
+                }
+            ]
+        }
+    ],
+    "generate": {
+        "output": {
+            "type": "path",
+            "description": "组件生成路径（相对于当前路径）",
+            "validate": ["path"]
+        },
+        "rules": [
+            {
+                "template": {
+                    "prop": "type",
+                    "value": {
+                        "class": "template/class.ts",
+                        "function": "template/function.ts"
+                    }
+                }
+            }
+        ]
+    },
+    "modify": []
+}

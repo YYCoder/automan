@@ -21,6 +21,6 @@
   },
   "exclude": [
     "examples/",
-    "__tests__/"
+    "tests/"
   ]
 }

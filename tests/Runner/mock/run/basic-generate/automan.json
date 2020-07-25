@@ -1,0 +1,51 @@
+{
+    "name": "basic-generate",
+    "description": "basic-generate",
+    "props": [
+        {
+            "name": "name",
+            "type": "string",
+            "description": "name",
+            "validate": ["ascii"]
+        },
+        {
+            "name": "type",
+            "type": "list",
+            "description": "type",
+            "prompt": [
+                {
+                    "value": "class",
+                    "name": "Class"
+                },
+                {
+                    "value": "function",
+                    "name": "Function"
+                }
+            ]
+        }
+    ],
+    "generate": {
+        "output": {
+            "type": "path",
+            "description": "output",
+            "validate": ["path"]
+        },
+        "rules": [
+            {
+                "template": {
+                    "prop": "type",
+                    "value": {
+                        "class": "template/class.ts",
+                        "function": "template/function.ts"
+                    }
+                },
+                "rename": "__name__/index.tsx"
+            },
+            {
+                "template": "template/style.less",
+                "rename": "__name__/style.less"
+            }
+        ]
+    },
+    "modify": []
+}

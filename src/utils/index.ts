@@ -1,5 +1,5 @@
 import { ObjectType } from "../../types/utils";
-import { relative, sep } from "path";
+import path, { relative, sep } from "path";
 
 export const jsonstringify = (obj: ObjectType) => JSON.stringify(obj, null, '...');
 
@@ -12,3 +12,6 @@ export const jsonstringify = (obj: ObjectType) => JSON.stringify(obj, null, '...
 export const relativeRoot = (from: string, to: string) => {
     return relative(from, to).split(sep)?.[0] ?? '';
 };
+
+export const resolveCwd = (dir: string) => path.resolve(process.cwd(), dir);
+export const resolveDirname = (dirname: string, dir: string) => path.resolve(dirname, dir);
