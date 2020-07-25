@@ -1,17 +1,17 @@
 {
-    "name": "react-component",
-    "description": "生成一个 react 组件，支持函数组件及类组件",
+    "name": "workflow name",
+    "description": "workflow description",
     "props": [
         {
             "name": "name",
             "type": "string",
-            "description": "组件名称（非中文）",
+            "description": "name of component",
             "validate": ["ascii"]
         },
         {
             "name": "type",
             "type": "list",
-            "description": "组件类型",
+            "description": "type of component",
             "prompt": [
                 {
                     "value": "class",
@@ -27,7 +27,7 @@
     "generate": {
         "output": {
             "type": "path",
-            "description": "组件生成路径（相对于当前路径）",
+            "description": "path to the generated component",
             "validate": ["path"]
         },
         "rules": [
@@ -39,7 +39,7 @@
                         "function": "template/function.ts"
                     }
                 },
-                "rename": "__name__/index.ts"
+                "rename": "__name__/index.tsx"
             },
             {
                 "template": "template/style.less",
