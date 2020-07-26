@@ -1,18 +1,18 @@
 {
     "name": "add-call-chain",
-    "description": "添加链式调用",
+    "description": "add a function call to a call chain",
     "props": [
         {
             "name": "arg1",
             "type": "string",
-            "description": "调用参数 1",
-            "validate": ["boolean"]
+            "description": "arg 1",
+            "validate": ["ascii"]
         },
         {
             "name": "arg2",
             "type": "string",
-            "description": "调用参数 2",
-            "validate": ["number"]
+            "description": "arg 2",
+            "validate": ["ascii"]
         }
     ],
     "generate": {},
@@ -29,7 +29,7 @@
                         "123",
                         true,
                         null,
-                        "<%= `${arg1}${arg2}` %>",
+                        "<%= arg1 + '-' + arg2 %>",
                         {
                             "__type__": "var",
                             "value": "<%= `${arg1}${arg2}` %>"

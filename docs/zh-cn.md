@@ -3,15 +3,15 @@
 [![Coverage Status](https://coveralls.io/repos/github/YYCoder/automan/badge.svg?branch=master)](https://coveralls.io/github/YYCoder/automan?branch=master)
 [![Build Status](https://travis-ci.org/YYCoder/automan.svg?branch=master)](https://travis-ci.org/YYCoder/automan.svg?branch=master)
 
-[中文](./docs/zh-cn.md)
+[英文](../README.md)
 
-Automate your workflow by configuration and template, free yourself from annoying repetitive work 🚀.
-
+通过配置和模板自动化工作流，从重复性工作中解放双手 🚀。
 
 ## Installation
 TODO:
 
 ## Basic Usage
+Automan 是一个命令行工具，
 Automan is a command line tool, which takes a configuration as input and generates questions to get data from user to continue its work. So, basically, you do this `automan -c [automan configuration file path]` to get the questions, and answer them, that's it !
 
 There are two types of workflows that Automan provided, one called `generate` and the other called `modify`.
@@ -388,5 +388,3 @@ Automan is focusing on automate workflow other than using shortcuts to write cod
 - [ ] add JSX element transformer
 - [ ] formatting problems when generating code
 - [ ] hook system
-
- 
