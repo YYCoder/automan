@@ -1,7 +1,7 @@
 {
   "name": "automan",
   "version": "0.0.1",
-  "description": "",
+  "description": "Automate your workflow by configuration and template 🚀",
   "bin": {
     "automan": "./bin/index.js"
   },

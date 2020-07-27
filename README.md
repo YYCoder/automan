@@ -12,7 +12,11 @@ Automate your workflow by configuration and template, free yourself from annoyin
 TODO:
 
 ## Basic Usage
-Automan is a command line tool, which takes a configuration as input and generates questions to get data from user to continue its work. So, basically, you do this `automan -c [automan configuration file path]` to get the questions, and answer them, that's it !
+Automan is a command line tool, which takes a configuration as input and generates questions to get data from user to continue its work. So, basically, you write configuration, then you do this
+
+`automan -c [automan configuration file path]`
+
+to get the questions, and answer them, that's it !
 
 There are two types of workflows that Automan provided, one called `generate` and the other called `modify`.
 
@@ -103,6 +107,8 @@ Following is the result of this configuration:
 
 ![exmaple-1](./docs/imgs/example-1.gif)
 
+> If you have any questions, you can take a look at the `examples` folder.
+
 ## Command-Line API
 * **-f, --force**: By default, Automan will check whether there are unstaged changes in current repository, if true, it will refuse to continue. Using this option, it will override the default behavior
 
@@ -121,7 +127,7 @@ Following is the result of this configuration:
 ## Glossary
 
 ### ejs template
-Automan use ejs for templating, you can use it both in your template files and your transformer configurations.
+Automan use [ejs](https://ejs.co/) for templating, you can use it both in your template files and your transformer configurations.
 
 ### path-placeholder
 Identifier in path-like string wrapped by two underscores for each side (e.g. `__name__/dir` is `__name__`). Automan will substitute it with the value of name field in questions.
@@ -267,6 +273,9 @@ CodeUnit is an object, with `__type__` field and `value` field, it can be a recu
 ### validator
 Functions used for validating answers, currently provided four internal validators `'ascii' | 'path' | 'number' | 'boolean'`
 
+### transformer
+Classes used for transforming code with the `modify` configuration.
+
 
 ## Configuration
 Automan is a configuration-driven tool, so the most important part of it is how to configure it.
@@ -294,8 +303,9 @@ Automan is a configuration-driven tool, so the most important part of it is how 
   * **prompt**: array of selections used by `type: 'list'` question, contains `value` and `name` field
 
 ### Generate
-* **output**: properties as same as question in `props` option, but without `name` field
-  > This option is required if you want to generate files, and it is used by all rules below which doesn't have its own `output` option
+* **output**: common config for all rules to determine where to generate files. Properties as same as question in `props` option, but without `name` field
+  
+  > If you want to generate files all reside in a same folder, you can just specify this option here, but if you specified `output` option in every single rule, you don't have to use this option, rule-specified `output` has higher priority.
 
 * **extraDir**: sometimes you want to generate files in a new folder, this option lets you achieve that by specifying a path like string (e.g. `foo/bar`)
 
@@ -310,7 +320,7 @@ Automan is a configuration-driven tool, so the most important part of it is how 
       
       * **value**: a map of question value to template path, **relative to configuration file path**
   
-  * **output**: same as the `output` option above, but used for single file exclusively, if the rule has a `output` option itself, it will override the `output` option in `generate` option
+  * **output**: same as the `output` option above, but used for single file exclusively, mostly used for generating files reside in different folders. If the rule has a `output` option itself, it will override the `output` option in `generate` option
   
   * **rename**: by default, it will use the template name as the generated file name, if you want to change it, or make a new folder to contain the generated file, this option let you do that.
 
@@ -347,7 +357,7 @@ The `modify` options takes an array of configurations that modify the files uses
 
     * **args**: arguments for the function call, both **literal** and **CodeUnit** are available
 
-> Automan is still work in progress, it may have a lot of problems, so if you have any questions, don't hesitate to raise an issue or PR to help me out 😁.
+> Automan is still work in progress, it may have some problems, so if you have any questions, don't hesitate to raise an issue or PR to help me out 😁.
 
 ## Unit Testing
 
@@ -356,7 +366,7 @@ The `modify` options takes an array of configurations that modify the files uses
 > Don't forget to run `yarn clear` or `npm run clear` first then run the test script, or the test coverage result would be wrong.
 
 ## Motivation
-Mostly, we will face some situations that are completely pointless, only makes you typing all the time. For example, when adding a page or adding a component. First, you make a new file, then, you write a lot of template code like below (as a front-end developer):
+Mostly, we will face some situations that are completely pointless (as a front-end developer), only makes you typing all the time. For example, when adding a page or adding a component. First, you make a new file, then, you write a lot of template code like below:
 
 ```jsx
 import React from 'react';
@@ -370,14 +380,14 @@ export default class extends React.Component {
 }
 ```
 
-This is annoying that it doesn't mean anything, only some template code, and this is a immensely simple example, most time it's even worse, you have to make a stylesheet and import it to your component, if you are adding a page, you might have to modify your routes config, etc.
+This is annoying that it doesn't mean anything, only some template code, and this is an immensely simple example, most time it's even worse, you have to make a stylesheet and import it to your component, if you are adding a page, you might have to modify your routes config, etc.
 
 As a engineer, we shouldn't be bothered by such things, it only lead us to [RSI](http://en.wikipedia.org/wiki/Repetitive_strain_injury).
 
 So, here comes Automan, which goal is free you from pointless typing as much as possible, the best case is you don't have to worry about making a new file or modifying some config at all, just answer some simple questions and Automan will take care of it for you.
 
 ## Difference Between Code Snippet Tool
-Automan is focusing on automate workflow other than using shortcuts to write code faster, including making new file from template, modifying files. Although the goal both are make developers work faster, type less, but I believe Automan is more handy after you get familiar with it.
+Automan is focusing on automating workflow other than using shortcuts to write code faster, including making new file from templates, modifying files automatically. Although the goal both are making developers work faster, type less, but I believe Automan is more handier after you get familiar with it.
 
 
 ## TODO
